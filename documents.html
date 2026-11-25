@@ -1,0 +1,264 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Documents - Bike Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+            padding: 35px 20px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .form-card, .documents-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            margin-bottom: 25px;
+        }
+
+        h1, h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #334155;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #2563eb;
+        }
+
+        input[type="file"] {
+            background: #f8fafc;
+            cursor: pointer;
+        }
+
+        .file-hint {
+            color: #64748b;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .document-card {
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 18px;
+            background: #f8fafc;
+        }
+
+        .document-card h3 {
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        .document-card p {
+            color: #475569;
+            margin-bottom: 9px;
+            font-size: 14px;
+        }
+
+        .document-card a {
+            display: inline-block;
+            margin-top: 12px;
+            color: #2563eb;
+            font-weight: bold;
+            text-decoration: none;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-top: 8px;
+        }
+
+        .valid {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .expired {
+            background: #fee2e2;
+            color: #991b1b;
+        }
+
+        .expiring {
+            background: #fef3c7;
+            color: #92400e;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .form-card, .documents-section {
+                padding: 22px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+
+        <div class="form-card">
+
+            <h1>📄 Bike Documents</h1>
+
+            <p class="subtitle">
+                Manage all your bike documents in one place.
+            </p>
+
+            <form id="documentForm">
+
+                <div class="form-group">
+                    <label>Select Bike</label>
+                    <select id="bikeId" required>
+                        <option value="">Loading bikes...</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Document Type</label>
+                    <select id="documentType" required>
+                        <option value="">Select Document</option>
+                        <option value="RC Book">RC Book</option>
+                        <option value="Insurance">Insurance</option>
+                        <option value="Driving Licence">Driving Licence</option>
+                        <option value="Pollution Certificate">Pollution Certificate</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Document Number</label>
+                    <input type="text" id="documentNumber" placeholder="Enter document number" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Issue Date</label>
+                    <input type="date" id="issueDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Expiry Date</label>
+                    <input type="date" id="expiryDate" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Upload Document</label>
+                    <input
+                        type="file"
+                        id="documentFile"
+                        accept=".pdf,.jpg,.jpeg,.png"
+                        required
+                    >
+                    <p class="file-hint">Allowed: PDF, JPG, PNG | Maximum size: 5 MB</p>
+                </div>
+
+                <button type="submit">UPLOAD DOCUMENT</button>
+
+                <p id="message"></p>
+
+            </form>
+
+        </div>
+
+        <div class="documents-section">
+
+            <h2>My Documents</h2>
+
+            <p class="subtitle">
+                Check your document details and expiry status.
+            </p>
+
+            <div id="documentList">
+                <p>Select a bike to view its documents.</p>
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="documents.js"></script>
+
+</body>
+</html>

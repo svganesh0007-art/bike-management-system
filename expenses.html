@@ -1,0 +1,161 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Expenses</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background: #f1f5f9;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            text-align: center;
+            color: #1e293b;
+        }
+
+        .expense-form, .expense-card, .total-card {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .expense-card button {
+            width: 48%;
+        }
+
+        .expense-card .delete-btn {
+            background: #dc2626;
+        }
+
+        .total-card {
+            text-align: center;
+        }
+
+        .total-card h1 {
+            color: #16a34a;
+            font-size: 32px;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>💰 BIKE EXPENSES</h1>
+
+        <div class="expense-form">
+
+            <h2>Add Expense Details</h2>
+
+            <form id="expenseForm">
+
+                <label>Select Bike</label>
+                <select id="bikeId" required>
+                    <option value="">Loading bikes...</option>
+                </select>
+
+                <label>Expense Date</label>
+                <input type="date" id="expenseDate" required>
+
+                <label>Expense Category</label>
+                <select id="category" required>
+                    <option value="">Select Category</option>
+                    <option value="Petrol">Petrol</option>
+                    <option value="Repair">Repair</option>
+                    <option value="Spare Parts">Spare Parts</option>
+                    <option value="Insurance">Insurance</option>
+                    <option value="Accessories">Accessories</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Amount (₹)</label>
+                <input type="number" id="amount" min="0" required>
+
+                <label>Description</label>
+                <textarea id="description" rows="3"></textarea>
+
+                <button type="submit">ADD EXPENSE</button>
+
+            </form>
+
+            <p id="message"></p>
+
+        </div>
+
+        <div class="total-card">
+            <h2>Total Expenses</h2>
+            <h1 id="totalExpenses">₹0</h1>
+        </div>
+
+        <h2>My Expense History</h2>
+
+        <div id="expenseList">
+            <p>Select a bike to view expenses.</p>
+        </div>
+
+        <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+
+    </div>
+
+    <script src="expenses.js"></script>
+
+</body>
+</html>

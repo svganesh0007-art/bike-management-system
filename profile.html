@@ -1,0 +1,233 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Profile | Bike Management</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: #f1f5f9;
+            color: #1e293b;
+            padding: 25px 15px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .header a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .profile-banner {
+            background: linear-gradient(120deg, #172554, #2563eb);
+            color: white;
+            padding: 30px;
+            border-radius: 14px;
+            margin-bottom: 22px;
+        }
+
+        .profile-banner h2 {
+            margin: 0 0 8px;
+        }
+
+        .profile-banner p {
+            margin: 0;
+            color: #dbeafe;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 22px;
+            box-shadow: 0 3px 12px #0000000d;
+        }
+
+        .card h2 {
+            margin-top: 0;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .field label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #2563eb;
+        }
+
+        input:disabled {
+            background: #e2e8f0;
+            color: #64748b;
+        }
+
+        button {
+            padding: 12px 22px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            cursor: pointer;
+            font-size: 15px;
+            margin-top: 20px;
+        }
+
+        .logout {
+            background: #dc2626;
+        }
+
+        #profileMessage, #passwordMessage {
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        @media(max-width: 600px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                align-items: flex-start;
+                gap: 10px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="header">
+            <h1>My Profile</h1>
+            <a href="dashboard.html">← Dashboard</a>
+        </div>
+
+        <div class="profile-banner">
+            <h2 id="profileHeading">Welcome!</h2>
+            <p>Manage your personal information and account details.</p>
+        </div>
+
+        <div class="card">
+            <h2>Personal Information</h2>
+
+            <form id="profileForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Full Name</label>
+                        <input type="text" id="name" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Father's Name</label>
+                        <input type="text" id="fatherName">
+                    </div>
+
+                    <div class="field">
+                        <label>Date of Birth</label>
+                        <input type="date" id="dateOfBirth">
+                    </div>
+
+                    <div class="field">
+                        <label>Mobile Number</label>
+                        <input type="tel" id="mobileNumber" maxlength="10" pattern="[0-9]{10}" placeholder="Enter 10-digit number">
+                    </div>
+
+                    <div class="field">
+                        <label>Gender</label>
+                        <select id="gender">
+                            <option value="">Select Gender</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Registered Email</label>
+                        <input type="email" id="email" disabled>
+                    </div>
+
+                </div>
+
+                <button type="submit">Save Profile Details</button>
+
+            </form>
+
+            <p id="profileMessage"></p>
+        </div>
+
+        <div class="card">
+            <h2>Change Password</h2>
+
+            <form id="passwordForm">
+
+                <div class="field">
+                    <label>Current Password</label>
+                    <input type="password" id="currentPassword" required>
+                </div>
+
+                <div class="field">
+                    <label>New Password</label>
+                    <input type="password" id="newPassword" required minlength="6">
+                </div>
+
+                <button type="submit">Change Password</button>
+
+            </form>
+
+            <p id="passwordMessage"></p>
+        </div>
+
+        <div class="card">
+            <h2>Account Settings</h2>
+            <p>Logout from your Bike Management account.</p>
+            <button class="logout" id="logoutBtn">Logout</button>
+        </div>
+
+    </div>
+
+    <script src="profile.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,152 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service History</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px 15px;
+            background: #f1f5f9;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        h1, h2 {
+            color: #1e293b;
+            text-align: center;
+        }
+
+        .service-form, .service-card {
+            background: white;
+            padding: 25px;
+            margin-top: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input, select, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 7px;
+            border: 1px solid #cbd5e1;
+            border-radius: 7px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 20px;
+            border: none;
+            border-radius: 7px;
+            background: #2563eb;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .service-card button {
+            width: 48%;
+        }
+
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #2563eb;
+            text-decoration: none;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>🔧 SERVICE HISTORY</h1>
+
+        <div class="service-form">
+
+            <h2>Add Service Details</h2>
+
+            <form id="serviceForm">
+
+                <label>Select Bike</label>
+                <select id="bikeId" required>
+                    <option value="">Loading bikes...</option>
+                </select>
+
+                <label>Service Date</label>
+                <input type="date" id="serviceDate" required>
+
+                <label>Service Center</label>
+                <input type="text" id="serviceCenter" required>
+
+                <label>Service Type</label>
+                <select id="serviceType" required>
+                    <option value="">Select Service Type</option>
+                    <option value="General Service">General Service</option>
+                    <option value="Oil Change">Oil Change</option>
+                    <option value="Repair">Repair</option>
+                    <option value="Engine Service">Engine Service</option>
+                    <option value="Other">Other</option>
+                </select>
+
+                <label>Service Amount (₹)</label>
+                <input type="number" id="amount" min="0" required>
+
+                <label>Description</label>
+                <textarea id="description" rows="3"></textarea>
+
+                <label>Next Service Date</label>
+                <input type="date" id="nextServiceDate">
+
+                <button type="submit">ADD SERVICE</button>
+
+            </form>
+
+            <p id="message"></p>
+
+        </div>
+
+        <div class="service-card">
+    <h2>Total Service Expenses</h2>
+    <h1 id="totalExpenses">₹0</h1>
+</div>
+        <h2>My Service Records</h2>
+
+        <div id="serviceList">
+            <p>Select a bike to view service records.</p>
+        </div>
+
+        <a class="back-link" href="dashboard.html">← Back to Dashboard</a>
+
+    </div>
+
+    <script src="servicehistory.js"></script>
+
+</body>
+</html>

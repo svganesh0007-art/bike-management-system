@@ -1,0 +1,153 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Bike - Bike Management</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .search-card, .result-card {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            margin-bottom: 25px;
+        }
+
+        h1, h2 {
+            color: #1e293b;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #message {
+            margin-top: 18px;
+            text-align: center;
+            font-size: 14px;
+        }
+
+        .bike-details {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 10px;
+            border-left: 5px solid #2563eb;
+        }
+
+        .bike-details p {
+            margin-bottom: 12px;
+            color: #475569;
+        }
+
+        .bike-details h3 {
+            color: #2563eb;
+            margin-bottom: 18px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .search-card, .result-card {
+                padding: 22px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+
+        <div class="search-card">
+            <h1>🔍 Search Bike</h1>
+            <p class="subtitle">Enter a vehicle registration number to find bike details.</p>
+
+            <form id="searchForm">
+                <input
+                    type="text"
+                    id="registrationNumber"
+                    placeholder="Example: TN 69 AB 1234"
+                    required
+                >
+
+                <button type="submit">SEARCH BIKE</button>
+            </form>
+
+            <p id="message"></p>
+        </div>
+
+        <div class="result-card">
+            <h2>Bike Details</h2>
+            <div id="bikeResult">
+                <p class="subtitle">Search a registration number to view details.</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="searchbike.js"></script>
+
+</body>
+</html>

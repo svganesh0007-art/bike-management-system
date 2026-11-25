@@ -1,0 +1,482 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bike Management Dashboard</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f1f5f9;
+            color: #1e293b;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background: #0f172a;
+            color: white;
+            position: fixed;
+            left: 0;
+            top: 0;
+            padding: 28px 18px;
+        }
+
+        .logo {
+            font-size: 21px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            padding-left: 10px;
+        }
+
+        .logo span {
+            color: #38bdf8;
+        }
+
+        .nav-title {
+            color: #94a3b8;
+            font-size: 12px;
+            margin: 20px 10px 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .nav-link {
+            display: block;
+            color: #cbd5e1;
+            text-decoration: none;
+            padding: 14px 12px;
+            border-radius: 8px;
+            margin-bottom: 7px;
+            transition: 0.2s;
+        }
+
+        .nav-link:hover,
+        .nav-link.active {
+            background: #1e40af;
+            color: white;
+        }
+
+        .main {
+            margin-left: 250px;
+            padding: 30px;
+        }
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            gap: 15px;
+        }
+
+        .topbar h1 {
+            font-size: 25px;
+        }
+
+        .topbar p {
+            color: #64748b;
+            margin-top: 7px;
+        }
+
+        .profile-button {
+            background: white;
+            border: 1px solid #e2e8f0;
+            padding: 11px 17px;
+            border-radius: 8px;
+            color: #1e40af;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .welcome-banner {
+            background: linear-gradient(120deg, #1e3a8a, #2563eb);
+            color: white;
+            padding: 30px;
+            border-radius: 14px;
+            margin-bottom: 30px;
+        }
+
+        .welcome-banner h2 {
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .welcome-banner p {
+            color: #dbeafe;
+            line-height: 1.6;
+        }
+
+        .section-heading {
+            font-size: 20px;
+            margin-bottom: 18px;
+        }
+
+        .stats-container {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+            margin-bottom: 35px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 22px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px #00000008;
+            border: 1px solid #e2e8f0;
+        }
+
+        .stat-icon {
+            font-size: 25px;
+            margin-bottom: 15px;
+        }
+
+        .stat-card p {
+            color: #64748b;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+
+        .stat-card h2 {
+            font-size: 28px;
+            color: #1e40af;
+        }
+
+        .analytics-section {
+            margin-bottom: 35px;
+        }
+
+        .analytics-card {
+            background: white;
+            padding: 25px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 4px 15px #00000008;
+            width: 100%;
+            overflow: hidden;
+        }
+
+        .analytics-card h3 {
+            font-size: 17px;
+            color: #1e293b;
+            margin-bottom: 20px;
+        }
+
+        #monthlyExpenseChart {
+            display: block;
+            width: 100%;
+            max-width: 100%;
+            height: 280px;
+        }
+
+        .dashboard-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 1px solid #e2e8f0;
+            box-shadow: 0 3px 12px #00000008;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px #00000012;
+            border-color: #93c5fd;
+        }
+
+        .card-icon {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #eff6ff;
+            border-radius: 10px;
+            font-size: 25px;
+            margin-bottom: 18px;
+        }
+
+        .card h3 {
+            font-size: 17px;
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .footer {
+            text-align: center;
+            color: #94a3b8;
+            font-size: 13px;
+            margin-top: 40px;
+            padding: 20px;
+        }
+
+        @media(max-width: 1000px) {
+            .stats-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .dashboard-container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(max-width: 650px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 18px;
+            }
+
+            .logo {
+                margin-bottom: 15px;
+            }
+
+            .nav-title {
+                display: none;
+            }
+
+            .sidebar nav {
+                display: flex;
+                overflow-x: auto;
+                gap: 8px;
+            }
+
+            .nav-link {
+                white-space: nowrap;
+                margin: 0;
+                padding: 11px;
+                font-size: 13px;
+            }
+
+            .main {
+                margin-left: 0;
+                padding: 18px;
+            }
+
+            .topbar {
+                align-items: flex-start;
+            }
+
+            .topbar h1 {
+                font-size: 20px;
+            }
+
+            .welcome-banner {
+                padding: 23px;
+            }
+
+            .welcome-banner h2 {
+                font-size: 21px;
+            }
+
+            .stats-container,
+            .dashboard-container {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .stat-card,
+            .card {
+                padding: 16px;
+            }
+
+            .stat-card h2 {
+                font-size: 23px;
+            }
+
+            .card h3 {
+                font-size: 15px;
+            }
+
+            .analytics-card {
+                padding: 16px;
+            }
+
+            .analytics-card h3 {
+                font-size: 15px;
+            }
+
+            #monthlyExpenseChart {
+                height: 280px;
+            }
+        }
+
+        @media(max-width: 380px) {
+            .stats-container,
+            .dashboard-container {
+                grid-template-columns: 1fr;
+            }
+
+            .analytics-card {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <aside class="sidebar">
+
+        <div class="logo">🏍️ BIKE<span>MANAGEMENT</span></div>
+
+        <p class="nav-title">Main Menu</p>
+
+        <nav>
+            <a href="dashboard.html" class="nav-link active">📊 Dashboard</a>
+            <a href="mybike.html" class="nav-link">🏍️ My Bike</a>
+            <a href="searchbike.html" class="nav-link">🔍 Search Bike</a>
+            <a href="documents.html" class="nav-link">📄 Documents</a>
+            <a href="servicehistory.html" class="nav-link">🔧 Service History</a>
+            <a href="expenses.html" class="nav-link">💰 Expenses</a>
+            <a href="profile.html" class="nav-link">👤 My Profile</a>
+        </nav>
+
+    </aside>
+
+    <main class="main">
+
+        <div class="topbar">
+            <div>
+                <h1>Dashboard</h1>
+                <p>Manage your bikes and track everything in one place.</p>
+            </div>
+
+            <a href="profile.html" class="profile-button">👤 Profile</a>
+        </div>
+
+        <section class="welcome-banner">
+            <h2 id="welcomeMessage">Welcome!</h2>
+            <p>
+                Welcome to your Bike Management System.
+                Manage your bike details, documents, services and expenses easily.
+            </p>
+        </section>
+
+        <h2 class="section-heading">📊 Dashboard Overview</h2>
+
+        <div class="stats-container">
+
+            <div class="stat-card">
+                <div class="stat-icon">🏍️</div>
+                <p>Total Bikes</p>
+                <h2 id="totalBikes">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">📄</div>
+                <p>Total Documents</p>
+                <h2 id="totalDocuments">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">🔧</div>
+                <p>Service Records</p>
+                <h2 id="totalServices">0</h2>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <p>Service Expenses</p>
+                <h2 id="totalExpenses">₹0</h2>
+            </div>
+
+        </div>
+
+        <section class="analytics-section">
+
+            <h2 class="section-heading">📊 Expense Analytics</h2>
+
+            <div class="analytics-card">
+                <h3>Monthly Expense Overview</h3>
+                <canvas id="monthlyExpenseChart"></canvas>
+            </div>
+
+        </section>
+
+        <h2 class="section-heading">⚡ Quick Access</h2>
+
+        <div class="dashboard-container">
+
+            <div class="card" onclick="window.location.href='mybike.html'">
+                <div class="card-icon">🏍️</div>
+                <h3>My Bike</h3>
+                <p>Register, edit and manage your bike details.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='searchbike.html'">
+                <div class="card-icon">🔍</div>
+                <h3>Search Bike</h3>
+                <p>Find your bike using its registration number.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='documents.html'">
+                <div class="card-icon">📄</div>
+                <h3>Documents</h3>
+                <p>Upload and manage your bike documents and expiry dates.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='servicehistory.html'">
+                <div class="card-icon">🔧</div>
+                <h3>Service History</h3>
+                <p>Track service records and maintenance details.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='expenses.html'">
+                <div class="card-icon">💰</div>
+                <h3>Expenses</h3>
+                <p>Manage petrol, repair and other bike expenses.</p>
+            </div>
+
+            <div class="card" onclick="window.location.href='profile.html'">
+                <div class="card-icon">👤</div>
+                <h3>My Profile</h3>
+                <p>View and update your personal account information.</p>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            © 2026 Bike Management System | All Rights Reserved
+        </div>
+
+    </main>
+
+    <script>
+        const fullName = sessionStorage.getItem("userName");
+
+        if (fullName) {
+            const firstName = fullName.trim().split(" ")[0];
+
+            document.getElementById("welcomeMessage").textContent =
+                "Welcome back, " + firstName + "! 👋";
+        }
+    </script>
+
+    <script src="dashboard.js"></script>
+
+</body>
+</html>

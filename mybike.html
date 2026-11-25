@@ -1,0 +1,207 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Bike - Bike Management</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #f1f5f9;
+            padding: 40px 20px;
+        }
+
+        .container {
+            max-width: 750px;
+            margin: auto;
+        }
+
+        .top-bar {
+            margin-bottom: 25px;
+        }
+
+        .back-link {
+            text-decoration: none;
+            color: #2563eb;
+            font-weight: bold;
+        }
+
+        .form-card, .bike-section {
+            background: white;
+            padding: 30px;
+            border-radius: 16px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+            margin-bottom: 25px;
+        }
+
+        h1, h2 {
+            color: #1e293b;
+            margin-bottom: 12px;
+        }
+
+        .subtitle {
+            color: #64748b;
+            margin-bottom: 25px;
+            font-size: 14px;
+        }
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #334155;
+            font-weight: bold;
+            font-size: 14px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 13px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        input:focus, select:focus {
+            border-color: #2563eb;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1d4ed8;
+        }
+
+        #message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+        }
+
+        .bike-card {
+            border: 1px solid #e2e8f0;
+            border-left: 5px solid #2563eb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 18px;
+            background: #f8fafc;
+        }
+
+        .bike-card h3 {
+            color: #2563eb;
+            margin-bottom: 12px;
+        }
+
+        .bike-card p {
+            color: #475569;
+            margin-bottom: 9px;
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 20px 12px;
+            }
+
+            .form-card, .bike-section {
+                padding: 22px 16px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="top-bar">
+            <a href="dashboard.html" class="back-link">← Back to Dashboard</a>
+        </div>
+
+        <div class="form-card">
+
+            <h1>🏍️ My Bike Registration</h1>
+            <p class="subtitle">Enter your bike details to register your vehicle.</p>
+
+            <form id="bikeForm">
+
+                <div class="form-group">
+                    <label>Bike Name</label>
+                    <input type="text" id="bikeName" placeholder="Example: My Bike" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Brand</label>
+                    <input type="text" id="brand" placeholder="Example: Yamaha" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Model</label>
+                    <input type="text" id="model" placeholder="Example: R15 V4" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Registration Number</label>
+                    <input type="text" id="registrationNumber" placeholder="TN 69 AB 1234" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Fuel Type</label>
+                    <select id="fuelType" required>
+                        <option value="">Select Fuel Type</option>
+                        <option value="Petrol">Petrol</option>
+                        <option value="Diesel">Diesel</option>
+                        <option value="Electric">Electric</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Purchase Date</label>
+                    <input type="date" id="purchaseDate" required>
+                </div>
+
+                <button type="submit">ADD MY BIKE</button>
+
+                <p id="message"></p>
+
+            </form>
+
+        </div>
+
+        <div class="bike-section">
+            <h2>My Registered Bikes</h2>
+            <p class="subtitle">Your registered bike details appear here.</p>
+
+            <div id="bikeList">
+                <p>Loading your bikes...</p>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="mybike.js"></script>
+
+</body>
+</html>
