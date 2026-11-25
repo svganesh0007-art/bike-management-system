@@ -114,3 +114,10 @@ node server.js
 B.Tech – Artificial Intelligence and Data Science
 
 National Engineering College
+
+
+## Project Screenshots
+
+### Dashboard
+
+![Bike Management Dashboard](screenshots/dashboard.png)
