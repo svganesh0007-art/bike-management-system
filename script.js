@@ -20,7 +20,7 @@ const forgotMessage = document.getElementById("forgotMessage");
 const resetOtpMessage = document.getElementById("resetOtpMessage");
 const newPasswordMessage = document.getElementById("newPasswordMessage");
 
-const API = "http://localhost:5001/api/auth";
+const API = "http://https://bike-management-system.onrender.com/api/api/auth";
 
 let resetEmail = "";
 let resetToken = "";

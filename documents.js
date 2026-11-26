@@ -5,7 +5,7 @@ const documentList = document.getElementById("documentList");
 const message = document.getElementById("message");
 const fileInput = document.getElementById("documentFile");
 
-const API = "http://localhost:5001/api";
+const API = "http://https://bike-management-system.onrender.com/api/api";
 const userId = sessionStorage.getItem("userId");
 
 let editingDocumentId = null;
@@ -76,7 +76,7 @@ async function loadDocuments() {
             }
 
             const fileLink = doc.fileUrl
-                ? `<a href="http://localhost:5001${doc.fileUrl}" target="_blank" rel="noopener">VIEW DOCUMENT</a>`
+                ? `<a href="http://https://bike-management-system.onrender.com/api${doc.fileUrl}" target="_blank" rel="noopener">VIEW DOCUMENT</a>`
                 : "<p>No file uploaded</p>";
 
             return `

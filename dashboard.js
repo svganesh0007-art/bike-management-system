@@ -1,5 +1,5 @@
 
-const API = "http://localhost:5001/api";
+const API = "https://bike-management-system.onrender.com/api";
 const userId = sessionStorage.getItem("userId");
 
 async function loadDashboardStats() {

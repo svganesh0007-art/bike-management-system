@@ -3,7 +3,7 @@ const searchForm = document.getElementById("searchForm");
 const message = document.getElementById("message");
 const bikeResult = document.getElementById("bikeResult");
 
-const API = "http://localhost:5001/api/bikes";
+const API = "http://https://bike-management-system.onrender.com/api/api/bikes";
 
 searchForm.addEventListener("submit", async function(event) {
     event.preventDefault();
