@@ -1,5 +1,4 @@
-
-const API = "http://https://bike-management-system.onrender.com/api/api";
+const API = "https://bike-management-system.onrender.com/api";
 const userId = sessionStorage.getItem("userId");
 
 const profileForm = document.getElementById("profileForm");
