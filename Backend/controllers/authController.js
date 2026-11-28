@@ -3,15 +3,24 @@ const User = require("../models/User");
 const Otp = require("../models/Otp");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const sendOtpEmail = async (to, subject, text) => {
+    const { data, error } = await resend.emails.send({
+        from: "Bike Management <onboarding@resend.dev>",
+        to: [to],
+        subject,
+        text
+    });
+
+    if (error) {
+        throw new Error(error.message);
     }
-});
+
+    return data;
+};
 
 const registerUser = async (req, res) => {
     try {
@@ -62,14 +71,13 @@ const registerUser = async (req, res) => {
             expiresAt: new Date(Date.now() + 5 * 60 * 1000)
         });
 
-        const mailInfo = await transporter.sendMail({
-            from: process.env.EMAIL_USER,
-            to: normalizedEmail,
-            subject: "Bike Management - Email Verification OTP",
-            text: `Your OTP is ${otpCode}. It is valid for 5 minutes. Do not share this OTP with anyone.`
-        });
+        await sendOtpEmail(
+            normalizedEmail,
+            "Bike Management - Email Verification OTP",
+            `Your OTP is ${otpCode}. It is valid for 5 minutes. Do not share this OTP with anyone.`
+        );
 
-        console.log("OTP EMAIL SENT SUCCESSFULLY:", mailInfo.messageId);
+        console.log("Registration OTP email sent successfully");
 
         res.status(201).json({
             success: true,
@@ -244,12 +252,11 @@ const forgotPassword = async (req, res) => {
                 expiresAt: new Date(Date.now() + 5 * 60 * 1000)
             });
 
-            await transporter.sendMail({
-                from: process.env.EMAIL_USER,
-                to: normalizedEmail,
-                subject: "Bike Management - Password Reset OTP",
-                text: `Your password reset OTP is ${otpCode}. It is valid for 5 minutes. Do not share this OTP with anyone.`
-            });
+            await sendOtpEmail(
+                normalizedEmail,
+                "Bike Management - Password Reset OTP",
+                `Your password reset OTP is ${otpCode}. It is valid for 5 minutes. Do not share this OTP with anyone.`
+            );
         }
 
         res.json({
