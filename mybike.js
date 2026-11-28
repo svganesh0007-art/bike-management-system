@@ -1,7 +1,7 @@
 
 const bikeForm = document.getElementById("bikeForm");
 const message = document.getElementById("message");
-const API = "http://https://bike-management-system.onrender.com/api/api/bikes";
+const API = "https://bike-management-system.onrender.com/api/bikes";
 const bikeList = document.getElementById("bikeList");
 
 let editingBikeId = null;

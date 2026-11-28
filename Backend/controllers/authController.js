@@ -3,23 +3,55 @@ const User = require("../models/User");
 const Otp = require("../models/Otp");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
+const nodemailer = require("nodemailer");
 const { Resend } = require("resend");
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const emailProvider =
+    process.env.EMAIL_PROVIDER ||
+    (process.env.RESEND_API_KEY ? "resend" : "gmail");
+
+const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+    }
+});
 
 const sendOtpEmail = async (to, subject, text) => {
-    const { data, error } = await resend.emails.send({
-        from: "Bike Management <onboarding@resend.dev>",
-        to: [to],
-        subject,
-        text
-    });
+    if (emailProvider === "gmail") {
+        const mailInfo = await transporter.sendMail({
+            from: process.env.EMAIL_USER,
+            to,
+            subject,
+            text
+        });
 
-    if (error) {
-        throw new Error(error.message);
+        return mailInfo;
     }
 
-    return data;
+    if (emailProvider === "resend") {
+        if (!process.env.RESEND_API_KEY) {
+            throw new Error("Resend API key is missing");
+        }
+
+        const resend = new Resend(process.env.RESEND_API_KEY);
+
+        const { data, error } = await resend.emails.send({
+            from: "Bike Management <onboarding@resend.dev>",
+            to: [to],
+            subject,
+            text
+        });
+
+        if (error) {
+            throw new Error(error.message);
+        }
+
+        return data;
+    }
+
+    throw new Error("Invalid email provider configuration");
 };
 
 const registerUser = async (req, res) => {
@@ -77,7 +109,7 @@ const registerUser = async (req, res) => {
             `Your OTP is ${otpCode}. It is valid for 5 minutes. Do not share this OTP with anyone.`
         );
 
-        console.log("Registration OTP email sent successfully");
+        console.log("Registration OTP sent successfully");
 
         res.status(201).json({
             success: true,
